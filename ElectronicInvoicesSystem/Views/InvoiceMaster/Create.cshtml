@@ -1,0 +1,463 @@
+﻿@model ElectronicInvoicesSystem.ModelsView.InvoiceMasterViewModel
+
+@{
+    ViewData["Title"] = "إضافة مستند";
+    Layout = "~/Views/Shared/_NewLayout.cshtml";
+}
+
+<style>
+    .pt-3-half {
+        padding-top: 1rem;
+    }
+
+    tr input {
+        max-width: 80Px;
+        text-align: center;
+    }
+    body {
+        overflow: hidden; /* Hide scrollbars */
+    }
+</style>
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<link href="~/lib/bootstrap-v4-rtl-main/dist/css/bootstrap-rtl.css" rel="stylesheet" />
+<h5>المستندات</h5>
+<div class="d-inline gap-2 col-2 mx-auto">
+    <button class="btn btn-primary" type="button" id="CreateBtn"> <i class="fa fa-save"></i> حفظ وإرسال </button>
+    <a class="btn btn-success" asp-action="Create"> <i class="fa fa-file-o"></i> جديد </a>
+    <a class="btn btn-info" asp-action="Index"> <i class="fa fa-list-ol"></i> قائمة المستندات</a>
+</div>
+<hr />
+<div class="row">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <div class="row row-cols-3">
+        <div class="col">
+            <div class="form-group">
+                <label asp-for="code" class="control-label"></label>
+                <input asp-for="code" class="form-control" required />
+                <span asp-validation-for="code" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="col">
+            <div class="form-group">
+                <label asp-for="date" class="control-label"></label>
+                <input asp-for="date" class="form-control" value="@DateTime.Now" required />
+                <span asp-validation-for="date" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="col">
+            <div class="form-group">
+                <label asp-for="curuncyId" class="control-label"></label>
+                <select class="form-control" asp-for="curuncyId" asp-items="@(new SelectList(Model.Currences,"UniqueId","NameAr"))"></select>
+                <span asp-validation-for="curuncyId" class="text-danger"></span>
+            </div>
+        </div>
+    </div>
+    <div class="row row-cols-3">
+        <div class="col">
+            <div class="form-group">
+                <label asp-for="customerId" class="control-label"></label>
+                <select class="form-control" id="customerId" asp-for="customerId" asp-items="@(new SelectList(Model.customers,"UniqueId","NameAr"))"></select>
+                <span asp-validation-for="customerId" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="col">
+            <div class="form-group">
+                <label asp-for="invTotal" class="control-label"></label>
+                <input asp-for="invTotal" id="invTotal" class="form-control" disabled readonly />
+                <span asp-validation-for="invTotal" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="col">
+            <div class="form-group">
+                <label asp-for="invDiscount" class="control-label"></label>
+                <input asp-for="invDiscount" class="form-control" id="invDiscount" disabled readonly />
+                <span asp-validation-for="invDiscount" class="text-danger"></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="row row-cols-3">
+        <div class="col">
+            <div class="form-group">
+                <label asp-for="invTotalAfterDiscount" class="control-label"></label>
+                <input asp-for="invTotalAfterDiscount" class="form-control" id="invTotalAfterDiscount" disabled readonly />
+                <span asp-validation-for="invTotalAfterDiscount" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="col">
+            <div class="form-group">
+                <label asp-for="invTax" class="control-label"></label>
+                <input asp-for="invTax" class="form-control" id="invTax" disabled readonly />
+                <span asp-validation-for="invTax" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="col">
+            <div class="form-group">
+                <label asp-for="invNet" class="control-label"></label>
+                <input asp-for="invNet" class="form-control" id="itemNetValueMaster" disabled readonly />
+                <span asp-validation-for="invNet" class="text-danger"></span>
+            </div>
+        </div>
+    </div>
+    <div class="row row-cols-3">
+        <div class="col">
+            <div class="form-group">
+                <label asp-for="DocType" class="control-label"></label>
+                <select class="form-control" id="DocType" asp-for="DocType" asp-items="@(new SelectList(Model.DocTypes,"id","name"))"></select>
+                <span asp-validation-for="DocType" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="col">
+            <div class="form-group">
+                <label asp-for="invState" class="control-label"></label>
+                <input asp-for="invState" class="form-control" disabled readonly />
+                <span asp-validation-for="invState" class="text-danger"></span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <h6 class="card-header">
+        تفاصيل الفاتورة
+    </h6>
+    <div class="card-body">
+        <div id="table" class="table-editable">
+            <span class="table-add float-right mb-3 mr-2">
+                <a href="#!" class="text-success"><i class="fas fa-plus fa-2x" aria-hidden="true"></i></a>
+            </span>
+            <table class="table table-bordered table-responsive table-striped text-center">
+                <thead>
+                    <tr>
+                        <th class="text-center d-none">id</th>
+                        <th class="text-center">الصنف</th>
+                        <th class="text-center">الكمية</th>
+                        <th class="text-center">الوحدة</th>
+                        <th class="text-center">السعر</th>
+                        <th class="text-center">قيمة الصنف</th>
+                        <th class="text-center">نسبة الخصم</th>
+                        <th class="text-center">قيمة الخصم</th>
+                        <th class="text-center">نوع الضريبة</th>
+                        <th class="text-center">نسبة الضريبة</th>
+                        <th class="text-center">قيمة الضريبة</th>
+                        <th class="text-center">الصافي</th>
+                        <th class="text-center">حذف</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="hide">
+                        <td class="pt-3-half d-none" contenteditable="false" id="">id</td>
+                        <td class="pt-3-half"><select class="form-control itemId" id="itemId" asp-items="@(new SelectList(Model.Items,"UniqueId","NameAr"))"></select></td>
+                        <td class="pt-3-half tablecol"><input class="Qty" type="number" value="0" id="Qty"></td>
+                        <td class="pt-3-half"><select class="form-control unitId" id="unitId" asp-items="@(new SelectList(Model.Units,"UniqueId","NameAr"))"></select></td>
+                        <td class="pt-3-half tablecol"><input class="price" type="number" id="price" value="0"></td>
+                        <td class="pt-3-half itemValue" id="itemValue">0</td>
+                        <td class="pt-3-half"><input class="discountRate" type="number" id="discountRate" value="0"></td>
+                        <td class="pt-3-half discountValue" id="discountValue">0</td>
+                        <td class="pt-3-half taxType" id="taxType">ضريبة القيمة المضافة</td>
+                        <td class="pt-3-half"><input class="taxRate" type="number" id="taxRate" value="14"></td>
+                        <td class="pt-3-half taxValue" id="taxValue">0</td>
+                        <td class="pt-3-half itemNetValue" id="itemNetValue">0</td>
+                        <td>
+                            <span class="table-remove">
+                                <button type="button" class="btn btn-danger btn-rounded btn-sm my-0">
+                                    Remove
+                                </button>
+                            </span>
+                        </td>
+                    </tr>
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+
+<script>
+    const $tableID = $('#table');
+    const $BTN = $('#export-btn');
+    const $EXPORT = $('#export');
+
+    const newTr = '<tr class=""><td class="pt-3-half d-none" contenteditable="false" id="">id</td>' +
+        '<td class="pt-3-half"><select class="form-control" id="itemId"  asp-items="@(new SelectList(Model.Items,"UniqueId","NameAr"))"></select></td>' +
+        '<td class="pt-3-half tablecol Qty"><input type="number" value="0" id="Qty"></td>' +
+        '<td class="pt-3-half"><select class="form-control" id="unitId" asp-items="@(new SelectList(Model.Units,"UniqueId","NameAr"))"></select></td>' +
+        '<td class="pt-3-half tablecol price"><input type="number" id="price" value="0"></td>' +
+        '<td class="pt-3-half itemValue" id="itemValue">0</td>' +
+        '<td class="pt-3-half"><input type="number" id="discountRate" value="0"></td>' +
+        '<td class="pt-3-half discountValue" id="discountValue">0</td>' +
+        '<td class="pt-3-half"><input type="number" id="taxType"></td>' +
+        '<td class="pt-3-half taxValue" id="taxValue">0</td>' +
+        '<td class="pt-3-half taxValue" id="taxValue">0</td>' +
+        '<td class="pt-3-half itemNetValue" id="itemNetValue">0</td>' +
+        '<td><span class="table-remove"><button type="button" class="btn btn-danger btn-rounded btn-sm my-0 waves-effect waves-light"> Remove </button></span></td></tr >';
+
+    $('.table-add').on('click', 'i', () => {
+        debugger
+        const $clone = $tableID.find('tbody tr ').last().clone(true).removeClass('hide table-line ').addClass('visibl');
+        $clone.find(".itemId").val(0);
+        $clone.find(".Qty").val(0);
+        $clone.find(".unitId").val(0);
+        $clone.find(".price").val(0);
+        $clone.find(".itemValue").text(0);
+        $clone.find(".discountRate").val(0);
+        $clone.find(".discountValue").text(0);
+        //$clone.find(".taxType").val(0);
+        //$clone.find(".taxRate").val(0);
+        $clone.find(".taxValue").text(0);
+        $clone.find(".itemNetValue").text(0);
+
+        //if ($tableID.find('tbody tr ').length === 0) {
+        //    $('tbody').append(newTr);
+        //}
+        $tableID.find('table').append($clone);
+    });
+      $tableID.on('click', '.table-remove', function () {
+        if ($tableID.find('tbody tr ').length  > 1) {
+            $(this).parents('tr').detach();
+        }
+      });
+
+    $tableID.on('click', '.table-up', function () {
+        const $row = $(this).parents('tr');
+        if ($row.index() === 0) {
+            return;
+        }
+        $row.prev().before($row.get(0));
+       });
+        $tableID.on('click',
+        '.table-down',
+        function () {
+            const $row = $(this).parents('tr');
+            $row.next().after($row.get(0));
+        }); // A few jQuery helpers for exporting only
+
+       jQuery.fn.pop = [].pop;
+       jQuery.fn.shift = [].shift;
+       $BTN.on('click', () => {
+        const $rows = $tableID.find('tr:not(:hidden)');
+        const headers = [];
+        const data = []; // Get the headers (add special header logic here)
+        $($rows.shift()).find('th:not(:empty)').each(function () {
+            headers.push($(this).text().toLowerCase());
+        }); // Turn all existing rows into a loopable array
+        $rows.each(function () {
+            const $td = $(this).find('td');
+            const h = {}; // Use the  headers from earlier to name our hash keys
+            headers.forEach((header, i) => {
+                h[header] = $td.eq(i).text();
+            });
+            data.push(h);
+        }); // Output the result
+        $EXPORT.text(JSON.stringify(data));
+    });
+
+    function calc_total() {
+        debugger
+        var invNet = 0;
+        var invTotal = 0;
+        var invDiscount = 0;
+        var taxValue = 0;
+        $(".itemNetValue").each(function () {
+            invNet += parseFloat($(this).text());
+        });
+        $(".itemValue").each(function () {
+            invTotal += parseFloat($(this).text());
+        });
+        $(".discountValue").each(function () {
+            invDiscount += parseFloat($(this).text());
+        });
+        $(".taxValue").each(function () {
+            taxValue += parseFloat($(this).text());
+        });
+
+        $('#invTotal').val(invTotal);
+        $('#invDiscount').val(invDiscount);
+        $('#invTax').val(taxValue);
+        $('#itemNetValueMaster').val(invNet);
+        $('#invTotalAfterDiscount').val(invTotal - invDiscount);
+
+    }
+
+    $(document).ready(function () {
+        $("#table").on("change", "input", function () {
+            var row = $(this).closest("tr");
+            var qty = parseFloat(row.find("#Qty").val());
+            var price = parseFloat(row.find("#price").val());
+            var discountRate = parseFloat(row.find("#discountRate").val());
+            var taxRate = parseFloat(row.find("#taxRate").val());
+            var taxRate = parseFloat(row.find("#taxRate").val());
+            var itemValue = qty * price ;
+            var discountValue = qty * price * discountRate / 100;
+            var itemValueAfterDisc = itemValue - discountValue;
+            var taxValue = ((qty * price) - (qty * price * discountRate / 100)) * taxRate / 100;
+            var itemNetValue = itemValueAfterDisc + taxValue;
+
+            row.find("#itemValue").text(isNaN(itemValue) ? 0 : itemValue);
+            row.find("#itemNetValue").text(isNaN(itemNetValue) ? 0 : itemNetValue);
+            row.find("#discountValue").text(isNaN(discountValue) ? 0 : discountValue);
+            row.find("#taxValue").text(isNaN(taxValue) ? 0 : taxValue);
+
+            calc_total();
+        });
+
+        $("#newBtn").click(function () {
+            $("#code").val(0);
+            $("#date").val(new Date());
+            $("#customerId").val(0);
+            $("#curuncyId").val(0);
+            $("#invDiscount").val(0);
+            $("#invTotal").val(0);
+            $("#invTotalAfterDiscount").val(0);
+            $("#invTax").val(0);
+            $("#itemNetValueMaster").val(0);
+            $("#invState").val(0);
+            $("#uuid").val(0);
+            $("#table tbody").find(".visibl").remove();
+            $.ajax({
+                type: "POST",
+                url: "/InvoiceMaster/GetMax",
+                contentType: "application/json",
+                dataType: "json",
+                success: function (result) {
+                    debugger
+                    $("#code").val(result);
+                },
+                error: function () {
+                    $("#code").val(0);
+                }
+            });
+
+
+        });
+
+        $("#CreateBtn").click(function () {
+            debugger
+            var msg = "";
+            var InvoiceDetailes = new Array();
+            var code = $("#code").val();
+            var date = $("#date").val();
+            var customerId = $("#customerId").val();
+            var curuncyId = $("#curuncyId").val();
+            var invDiscount = $("#invDiscount").val();
+            var invTotal = $("#invTotal").val();
+            var invTotalAfterDiscount = $("#invTotalAfterDiscount").val();
+            var invTax = $("#invTax").val();
+            var invNet = $("#itemNetValueMaster").val();
+            var DocType = $("#DocType").val();
+            /*var uuid = $("#uuid").val();*/
+            /*var PaymentmethodType = $("input[type='radio'][name='payment-method']:checked").attr('id');*/
+            debugger;
+            if (code <= 0 || code === null || code === "")
+            {
+                alert("يجب ادخال رقم الفاتورة");
+                return;
+            } else if (date <= 0 || date === "" || date === null) {
+                alert("يجب ادخال تاريخ الفاتورة");
+                return;
+            }else if (customerId <= 0 || customerId === null){
+                alert("يجب اختيار المشتري");
+                return;
+            }else if (curuncyId <= 0 || curuncyId === null) {
+                alert("يجب اختيار العملة");
+                return;
+            }else if (invTotal <= 0 || invTotal === null) {
+                alert("يجب ادخال قيمة الفاتورة");
+                return;
+            }else if ($("#table").find('tbody tr ').length <= 0) {
+                alert("يجب اختيار الأصناف");
+                return;
+            }
+
+            if (code > 0 && customerId > 0 && curuncyId > 0 && invTotal>0){
+                $('#table tbody tr').each(function () {
+                    if ($(this).find(".itemId").val() <= 0) {
+                        msg+=" يجب اختيار صنف  , "
+                    }
+                    if ($(this).find(".unitId").val() <= 0) {
+                        msg += " يجب اختيار الوحدة ,";
+                    }
+                    if ($(this).find(".price").val() <= 0) {
+                        msg +=  " يجب ادخال السعر   ,";
+                    }
+
+                    debugger;
+                    var inv = {};
+                    inv.itemId = $(this).find(".itemId").val();
+                    inv.Qty = $(this).find(".Qty").val();
+                    inv.unitId = $(this).find(".unitId").val();
+                    inv.price = $(this).find(".price").val();
+                    inv.itemValue = $(this).find(".itemValue").text();
+                    inv.discountRate = $(this).find(".discountRate").val();
+                    inv.discountValue = $(this).find(".discountValue").text();
+                    inv.taxType = $(this).find(".taxType").val();
+                    inv.taxRate = $(this).find(".taxRate").val();
+                    inv.taxValue = $(this).find(".taxValue").text();
+                    inv.itemNetValue = $(this).find(".itemNetValue").text();
+                    InvoiceDetailes.push(inv);
+                });
+                var invMaster = {};
+                invMaster.code = code;
+                invMaster.date = date;
+                invMaster.customerId = customerId;
+                invMaster.curuncyId = curuncyId;
+                invMaster.invDiscount = invDiscount;
+                invMaster.invTotal = invTotal;
+                invMaster.invTax = invTax;
+                invMaster.invTotalAfterDiscount = invTotalAfterDiscount;
+                invMaster.invNet = invNet;
+                invMaster.DocType = DocType;
+                debugger;
+                if (msg!="") {
+                    alert(msg);
+                    return;
+                }
+                $.ajax({
+                    type: "POST",
+                    url: "/InvoiceMaster/Create",
+                    data: { 'invMaster': invMaster, 'InvoiceDetailes': InvoiceDetailes},
+                    contentType: "application/x-www-form-urlencoded",
+                    dataType: "json",
+                    success: function (result) {
+                        debugger
+                        alert(result.result);
+                    },
+                    error: function (result) {
+                        alert(result.result);
+                    }
+                });
+            }
+            else
+            {
+                alert("يجب ادخال تفاصيل الفاتورة");
+            }
+        }
+        );
+
+        $("#DocType").change(function () {
+            debugger;
+            var docType = $(this).val();
+                $.ajax({
+                    type: "GET",
+                    url: "/InvoiceMaster/getCustomersOrSupplers",
+                    data: { 'docType': docType},
+                    success: function (data) {
+                        debugger;
+                    var s ;
+                    for (var i = 0; i < data.length; i++) {
+                        s += '<option value="' + data[i].uniqueId + '">' + data[i].nameAr + '</option>';
+                    }
+                    $("#customerId").html(s);
+                }
+            });
+        });
+    });
+</script>
+
+
+
+
+
+

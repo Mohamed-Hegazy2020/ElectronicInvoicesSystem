@@ -1,0 +1,198 @@
+﻿@model ElectronicInvoicesSystem.ModelsView.DocumentsMasterRpt
+
+@{
+    ViewData["Title"] = "إضافة مستند";
+    Layout = "~/Views/Shared/_NewLayout.cshtml";
+}
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<link href="~/lib/bootstrap-v4-rtl-main/dist/css/bootstrap-rtl.css" rel="stylesheet" />
+<h5>تقرير المستندات</h5>
+
+<form>
+    <div class="d-inline gap-2 col-2 mx-auto">
+        <button class="btn btn-primary" type="button" id="showBtn"> <i class="fa fa-save"></i> عرض </button>
+        <a class="btn btn-success" asp-action="Create"> <i class="fa fa-file-o"></i> جديد </a>
+        <button type="submit" asp-action="DocumentsRptPrint" class="btn btn-info" id="printBtn"> <i class="fa fa-list-ol"></i> طباعة</button>
+    </div>
+    <hr />
+    <div class="row" style="margin:2px 10px 2px 10px">
+        <div class="row row-cols-3">
+            <div class="col">
+                <div class="form-group">
+                    <label asp-for="code" class="control-label"></label>
+                    <input asp-for="code" class="form-control" id="code" />
+                </div>
+            </div>
+            <div class="col">
+                <div class="form-group">
+                    <label asp-for="fDate" class="control-label"></label>
+                    <input asp-for="fDate" id="fDate" class="form-control" value="@DateTime.Now" />
+
+                </div>
+            </div>
+            <div class="col">
+                <div class="form-group">
+                    <label asp-for="tDate" class="control-label"></label>
+                    <input asp-for="tDate" id="tDate" class="form-control" value="@DateTime.Now" />
+                </div>
+            </div>
+        </div>
+        <div class="row row-cols-3">
+            <div class="col">
+                <div class="form-group">
+                    <label asp-for="customerId" class="control-label"></label>
+                    <select class="form-control" id="customerId" asp-for="customerId" asp-items="@(new SelectList(Model.customers,"UniqueId","NameAr"))"></select>
+                    <span asp-validation-for="customerId" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="col">
+                <div class="form-group">
+                    <label asp-for="DocType" class="control-label"></label>
+                    <select class="form-control" id="DocType" asp-for="DocType" asp-items="@(new SelectList(Model.DocTypes,"id","name"))"></select>
+                </div>
+            </div>
+            <div class="col">
+                <div class="form-group">
+                    <label asp-for="DocState" class="control-label"></label>
+                    <select class="form-control" id="DocState" asp-for="DocState" asp-items="@(new SelectList(Model.DocStates,"id","name"))"></select>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card-body">
+        <div>
+            <table id="dtBasicExample" class="table table-bordered table-responsive-md table-striped text-center">
+                <thead>
+                    <tr>
+                        <th class="text-center">رقم المستند</th>
+                        <th class="text-center">التاريخ</th>
+                        <th class="text-center">نوع المستند</th>
+                        <th class="text-center">الحالة</th>
+                        <th class="text-center">البائع</th>
+                        <th class="text-center">المشتري</th>
+                        <th class="text-center">القيمة</th>
+                        <th class="text-center">الخصم</th>
+                        <th class="text-center">الضريبة</th>
+                        <th class="text-center">الصافي</th>
+                        <th class="text-center">العملة</th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</form>
+
+
+
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+
+<script>
+
+
+    $(document).ready(function () {
+
+
+        $("#newBtn").click(function () {
+            $("#code").val(0);
+            $("#date").val(new Date());
+            $("#customerId").val(0);
+            $("#curuncyId").val(0);
+            $("#invDiscount").val(0);
+            $("#invTotal").val(0);
+            $("#invTotalAfterDiscount").val(0);
+            $("#invTax").val(0);
+            $("#itemNetValueMaster").val(0);
+            $("#invState").val(0);
+            $("#uuid").val(0);
+            $("#dtBasicExample > tbody tr").remove();
+
+
+        });
+
+        $("#showBtn").click(function () {
+            debugger
+            $("#dtBasicExample > tbody tr").remove()
+            var InvoiceDetailes = new Array();
+            var code = $("#code").val();
+            var fdate = $("#fDate").val();
+            var tdate = $("#tDate").val();
+            var customerId = $("#customerId").val();
+            var DocType = $("#DocType").val();
+            var DocState = $("#DocState").val();
+
+            $.ajax({
+                type: "POST",
+                url: "/InvoiceMaster/DocumentsRpt",
+                data: { 'code': code, 'fdate': fdate, 'tdate': tdate, 'customerId': customerId, 'DocType': DocType, 'DocState': DocState},
+                contentType: "application/x-www-form-urlencoded",
+                dataType: "json",
+                success: function (data) {
+                    debugger
+
+
+                    var html = '';
+                    for (var i = 0; i < data.length; i++) {
+                        html += '<tr>' +
+                            '<td>' + data[i].code + '</td>' +
+                            '<td>' + data[i].docDate + '</td>' +
+                            '<td>' + data[i].docTypeName + '</td>' +
+                            '<td>' + data[i].docStateName + '</td>' +
+                            '<td>' + data[i].companyName + '</td>' +
+                            '<td>' + data[i].customerName + '</td>' +
+                            '<td>' + data[i].invTotal + '</td>' +
+                            '<td>' + data[i].invDiscount + '</td>' +
+                            '<td>' + data[i].invTax + '</td>' +
+                            '<td>' + data[i].invNet + '</td>' +
+                            '<td>' + data[i].curuncyName + '</td>' +
+                            //'<td><a class = "fa fa-refresh" href="/InvoiceMaster/Refresh/' + data[i].id + '"></a></td>' +
+                            //'<td>|<a class = "fa fa-info-circle" href="/InvoiceMaster/Details/' + data[i].id + '"></a></td>' +
+                            //'<td>|<a class = "fa fa-file-pdf-o" href="/InvoiceMaster/PrintViewToPdf/' + data[i].id + '"></a> </td>' +
+                            //'<td>|<a class = "fa fa-times-circle-o" href="/InvoiceMaster/CancelDocument/' + data[i].id + '"></a></td>' +
+                            '</tr>';
+                    }
+                    $('#dtBasicExample tbody').append(html);
+                },
+                error: function (result) {
+                    alert(result.result);
+                }
+            });
+
+
+        }
+        );
+
+        //$("#printBtn").click(function () {
+
+        //    var InvoiceDetailes = new Array();
+        //    var code = $("#code").val();
+        //    var fdate = $("#fDate").val();
+        //    var tdate = $("#tDate").val();
+        //    var customerId = $("#customerId").val();
+        //    var DocType = $("#DocType").val();
+        //    var DocState = $("#DocState").val();
+
+        //    $.ajax({
+        //        type: "POST",
+        //        url: "/InvoiceMaster/DocumentsRptPrint",
+        //        data: { 'code': code, 'fdate': fdate, 'tdate': tdate, 'customerId': customerId, 'DocType': DocType, 'DocState': DocState },
+        //        contentType: "application/x-www-form-urlencoded",
+        //        dataType: "json",     
+        //    });
+
+
+        //}
+        //);
+
+
+    });
+</script>
+
+
+
+
+
+

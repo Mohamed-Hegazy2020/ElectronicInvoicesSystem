@@ -1,0 +1,140 @@
+﻿@model IEnumerable<ElectronicInvoicesSystem.ModelsView.InvoiceMasterViewModel>
+
+@{
+    ViewData["Title"] = "المستندات";
+    Layout = "~/Views/Shared/_NewLayout.cshtml";
+}
+
+<link href="~/lib/bootstrap-v4-rtl-main/dist/css/bootstrap-rtl.css" rel="stylesheet" />
+<h1> <i class="fa fa-file-o"> </i>  المستندات </h1>
+
+<div class="row">
+    <div class="col">
+        <a class="btn btn-outline-primary" asp-action="Create"> <i class="fa fa-file-o"></i> مستند جديد </a>
+    </div>
+    <div class="col">
+        <div class="input-group">
+            <input id="search" name="search" type="text" class="form-control" placeholder="بحث">
+            <div class="input-group-append">
+                <button class="btn btn-secondary" type="button">
+                    <i class="fa fa-search"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="table-responsive">
+    <table class="table table-hover table-striped" id="dtBasicExample">
+        <thead>
+            <tr class="bg-secondary">
+
+                <th scope="row">
+                    @Html.DisplayNameFor(model => model.code)
+                </th>
+                <th scope="row">
+                    @Html.DisplayNameFor(model => model.date)
+                </th>
+                <th scope="row">
+                    @Html.DisplayNameFor(model => model.invTotal)
+                </th>
+                <th scope="row">
+                    @Html.DisplayNameFor(model => model.invDiscount)
+                </th>
+                <th scope="row">
+                    @Html.DisplayNameFor(model => model.invTax)
+                </th>
+                <th scope="row">
+                    @Html.DisplayNameFor(model => model.invNet)
+                </th>
+                <th scope="row">
+                    @Html.DisplayNameFor(model => model.DocTypeName)
+                </th>
+                <th scope="row">
+                    @Html.DisplayNameFor(model => model.invState)
+                </th>
+                <th scope="row"></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td scope="row">
+                        @Html.DisplayFor(modelItem => item.code)
+                    </td>
+                    <td scope="row">
+                        @Html.DisplayFor(modelItem => item.date)
+                    </td>
+                    <td scope="row">
+                        @Html.DisplayFor(modelItem => item.invTotal)
+                    </td>
+                    <td scope="row">
+                        @Html.DisplayFor(modelItem => item.invDiscount)
+                    </td>
+                    <td scope="row">
+                        @Html.DisplayFor(modelItem => item.invTax)
+                    </td>
+                    <td scope="row">
+                        @Html.DisplayFor(modelItem => item.invNet)
+                    </td>
+                    <td scope="row">
+                        @Html.DisplayFor(modelItem => item.DocTypeName)
+                    </td>
+                    <td scope="row">
+                        @Html.DisplayFor(modelItem => item.invState)
+                    </td>
+
+                    <td scope="row">
+                        @Html.ActionLink("", "Refresh", new { id = item.id }, htmlAttributes: new { @class = "fa fa-refresh", @title = "تحديث" }) |
+                        @*@Html.ActionLink("Edit", "Edit", new { id = item.id }) |*@
+                        @Html.ActionLink("", "Details", new { id = item.id }, htmlAttributes: new { @class = "fa fa-info-circle", @title = "التفاصيل" }) |
+                        @Html.ActionLink("", "PrintViewToPdf", new { id = item.id }, htmlAttributes: new { @class = "fa fa-file-pdf-o", @title = "تصدير PDF" }) |
+                        @Html.ActionLink("", "CancelDocument", new { id = item.id }, htmlAttributes: new { @class = "fa fa-times-circle-o", @title = "إلغاء" })
+
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+
+<script>
+
+    $(document).ready(function () {
+
+        $('input[name=search]').change(function () {
+            debugger;
+            var docCode = $(this).val();
+            $.ajax({
+                type: "GET",
+                url: "/InvoiceMaster/getDocumentByCode",
+                data: { 'docCode': docCode },
+                success: function (data) {
+                    debugger;
+
+                    $("#dtBasicExample > tbody tr").remove()
+                    var html = '';
+                    for (var i = 0; i < data.length; i++) {
+                        html += '<tr>' +
+                            '<td>' + data[i].code + '</td>' +
+                            '<td>' + data[i].date + '</td>' +
+                            '<td>' + data[i].invTotal + '</td>' +
+                            '<td>' + data[i].invDiscount + '</td>' +
+                            '<td>' + data[i].invTax + '</td>' +
+                            '<td>' + data[i].invNet + '</td>' +
+                            '<td>' + data[i].docTypeName + '</td>' +
+                            '<td>' + data[i].invState + '</td>' +
+                            '<td><a class = "fa fa-refresh" href="/InvoiceMaster/Refresh/' + data[i].id + '"></a></td>' +
+                            '<td>|<a class = "fa fa-info-circle" href="/InvoiceMaster/Details/' + data[i].id + '"></a></td>' +
+                            '<td>|<a class = "fa fa-file-pdf-o" href="/InvoiceMaster/PrintViewToPdf/' + data[i].id + '"></a> </td>' +
+                            '<td>|<a class = "fa fa-times-circle-o" href="/InvoiceMaster/CancelDocument/' + data[i].id + '"></a></td>' +
+                            '</tr>';
+                    }
+                    $('#dtBasicExample tbody').append(html);
+                }
+            });
+        });
+    });
+</script>

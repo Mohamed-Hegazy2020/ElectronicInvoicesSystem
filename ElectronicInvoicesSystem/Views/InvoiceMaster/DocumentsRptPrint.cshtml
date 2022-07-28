@@ -1,0 +1,103 @@
+﻿@model IEnumerable<ElectronicInvoicesSystem.ModelsView.DocumentsMasterRpt>
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html dir="rtl" lang="ar">
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>DocumentViewPdf</title>
+    <link href="~/lib/bootstrap-v4-rtl-main/dist/css/bootstrap-rtl.css" rel="stylesheet" />
+</head>
+<body>
+    @if (Model.Count() > 0)
+    {
+    <div class="container">
+        <table class="table table-bordered">
+            <thead class="text-left">
+                <tr><th class="border-0" colspan="7"><img alt="" src="~/assets/img/einvImg.png" width="100" height="70"> <strong style="font-size:x-large">نظام الفاتورة الإلكترونية </strong></th></tr>
+                <tr><th><hr /></th></tr>
+                <tr>
+                    <th class="bg-secondary"> @Html.DisplayNameFor(model => model.code)</th>
+                    <th> @Html.DisplayFor(model => model.First().codeFilter)</th>
+                    <th class="bg-secondary"> @Html.DisplayNameFor(model => model.fDate)</th>
+                    <th> @Html.DisplayFor(model => model.First().fDate)</th>
+                    <th class="bg-secondary"> @Html.DisplayNameFor(model => model.tDate)</th>
+                    <th> @Html.DisplayFor(model => model.First().tDate)</th>
+
+                </tr>
+
+                <tr>
+                    <th class="bg-secondary"> @Html.DisplayNameFor(model => model.DocStateName)</th>
+                    <th> @Html.DisplayFor(model => model.First().DocStateNameFilter)</th>
+                    <th class="bg-secondary"> @Html.DisplayNameFor(model => model.DocTypeName)</th>
+                    <th> @Html.DisplayFor(model => model.First().DocTypeNameFilter)</th>
+                    <th class="bg-secondary"> @Html.DisplayNameFor(model => model.customerName)</th>
+                    <th> @Html.DisplayFor(model => model.First().customerNameFilter)</th>
+
+                </tr>
+
+            </thead>
+            <tbody>
+
+            </tbody>
+        </table>
+
+        <table class="table table-bordered">
+            <thead class="text-left">
+
+                <tr>
+                    <th class="text-left">@Html.DisplayNameFor(model => model.code)</th>
+                    <th>@Html.DisplayNameFor(model => model.docDate)</th>
+                    <th>@Html.DisplayNameFor(model => model.DocTypeName)</th>
+                    <th>@Html.DisplayNameFor(model => model.DocStateName)</th>
+                    <th>@Html.DisplayNameFor(model => model.companyName)</th>
+                    <th>@Html.DisplayNameFor(model => model.customerName)</th>
+                    <th>@Html.DisplayNameFor(model => model.invTotal)</th>
+                    <th>@Html.DisplayNameFor(model => model.invDiscount)</th>
+                    <th>@Html.DisplayNameFor(model => model.invTax)</th>
+                    <th>@Html.DisplayNameFor(model => model.invNet)</th>
+                    <th>@Html.DisplayNameFor(model => model.curuncyName)</th>
+                </tr>               
+            </thead>
+            <tbody>
+                <tr></tr>
+                @foreach (var item in Model)
+                {
+
+                    <tr>
+                        <td class="text-left">@Html.DisplayFor(model => item.code)</td>
+                        <td>@Html.DisplayFor(model => item.docDate)</td>
+                        <td>@Html.DisplayFor(model => item.DocTypeName)</td>
+                        <td>@Html.DisplayFor(model => item.DocStateName)</td>
+                        <td>@Html.DisplayFor(model => item.companyName)</td>
+                        <td>@Html.DisplayFor(model => item.customerName)</td>
+                        <td>@Html.DisplayFor(model => item.invTotal)</td>
+                        <td>@Html.DisplayFor(model => item.invDiscount)</td>
+                        <td>@Html.DisplayFor(model => item.invTax)</td>
+                        <td>@Html.DisplayFor(model => item.invNet)</td>
+                        <td>@Html.DisplayFor(model => item.curuncyName)</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+
+
+
+
+    </div>
+
+
+    }
+
+</body>
+</html>
+
+
+
+
+

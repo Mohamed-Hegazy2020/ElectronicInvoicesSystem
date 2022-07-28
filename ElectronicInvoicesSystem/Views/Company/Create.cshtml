@@ -1,0 +1,168 @@
+﻿@model ElectronicInvoicesSystem.ModelsView.CompanyViewModel
+
+@{
+    ViewData["Title"] = "تعريف الشركة";
+    Layout = "~/Views/Shared/_NewLayout.cshtml";
+}
+<link href="~/lib/bootstrap-v4-rtl-main/dist/css/bootstrap-rtl.css" rel="stylesheet" />
+<h4>تعريف الشركة</h4>
+<form asp-action="Create">
+    <div style="margin:2px 20px 2px 20px">
+        <div class="d-inline gap-2 col-2 mx-auto">
+            <button class="btn btn-primary" type="submit" id="CreateBtn"> <i class="fa fa-save"></i> حفظ </button>
+            <a class="btn btn-info" asp-action="Index"><i class="fa fa-chevron-left"></i>  عودة للقائمة </a>
+        </div>
+        <hr />
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="row row-cols-2">
+            <div class="col">
+                <div class="form-group">
+                    <label asp-for="NameAr" class="control-label"></label>
+                    <input asp-for="NameAr" class="form-control" />
+                    <span asp-validation-for="NameAr" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="col">
+                <div class="form-group">
+                    <label asp-for="CreationDate" class="control-label"></label>
+                    <input asp-for="CreationDate" class="form-control" />
+                    <span asp-validation-for="CreationDate" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
+
+        <div class="row row-cols-2">
+            <div class="col">
+                <div class="form-group">
+                    <label asp-for="TaxAuthorityRegestrationNumber" class="control-label"></label>
+                    <input asp-for="TaxAuthorityRegestrationNumber" class="form-control" />
+                    <span asp-validation-for="TaxAuthorityRegestrationNumber" class="text-danger"></span>
+                </div>
+
+            </div>
+            <div class="col">
+                <div class="form-group">
+                    <label asp-for="TaxPayerActivityCode" class="control-label"></label>
+                    <input asp-for="TaxPayerActivityCode" class="form-control" />
+                    <span asp-validation-for="TaxPayerActivityCode" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
+        <div class="row row-cols-2">
+            <div class="col">
+                <div class="form-group">
+                    <label asp-for="ClassType" class="control-label"></label>
+                    <select class="form-control" asp-for="ClassType" asp-items="@(new SelectList(Model.ClassTypes,"code","name"))"></select>
+                    <span asp-validation-for="ClassType" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="col">
+                <div class="form-group">
+                    <label asp-for="CountryCode" class="control-label"></label>
+                    <select class="form-control" asp-for="CountryCode" asp-items="@(new SelectList(Model.Countries,"code","name"))"></select>
+                    <span asp-validation-for="CountryCode" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
+        <div class="row row-cols-2">
+            <div class="col">
+                <div class="form-group">
+                    <label asp-for="Email" class="control-label"></label>
+                    <input asp-for="Email" class="form-control" />
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="col">
+                <div class="form-group">
+                    <label asp-for="Phone" class="control-label"></label>
+                    <input asp-for="Phone" class="form-control" />
+                    <span asp-validation-for="Phone" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
+        <div class="row row-cols-2">
+            <div class="col">
+                <div class="form-group">
+                    <label asp-for="Governate" class="control-label"></label>
+                    <input asp-for="Governate" class="form-control" />
+                    <span asp-validation-for="Governate" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="col">
+                <div class="form-group">
+                    <label asp-for="RegionCity" class="control-label"></label>
+                    <input asp-for="RegionCity" class="form-control" />
+                    <span asp-validation-for="RegionCity" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
+        <div class="row row-cols-2">
+            <div class="col">
+                <div class="form-group">
+                    <label asp-for="Street" class="control-label"></label>
+                    <input asp-for="Street" class="form-control" />
+                    <span asp-validation-for="Street" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="col">
+                <div class="form-group">
+                    <label asp-for="BuildingNumber" class="control-label"></label>
+                    <input asp-for="BuildingNumber" class="form-control" />
+                    <span asp-validation-for="BuildingNumber" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
+        <div class="row row-cols-2">
+            <div class="col">
+                <div class="form-group">
+                    <label asp-for="Client_ID" class="control-label"></label>
+                    <input asp-for="Client_ID" class="form-control" />
+                    <span asp-validation-for="Client_ID" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="col">
+                <div class="form-group">
+                    <label asp-for="Client_Secret" class="control-label"></label>
+                    <input asp-for="Client_Secret" class="form-control" />
+                    <span asp-validation-for="Client_Secret" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
+        <div class="row row-cols-2">
+            <div class="col">
+                <div class="form-group">
+                    <label asp-for="TokenPassword" class="control-label"></label>
+                    <input asp-for="TokenPassword" class="form-control" />
+                    <span asp-validation-for="TokenPassword" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="col">
+                <div class="form-group">
+
+                </div>
+            </div>
+        </div>
+
+        @*<div class="row row-cols-2 p-3">
+            <div class="col-2">
+                <div class="form-group">
+                    <button type="submit" value="حفظ" class="btn btn-primary">
+                        <i class="fa fa-save"></i> حفظ
+                    </button>
+                </div>
+            </div>
+            <div class="col-6">
+                <div>
+                    <a class="btn btn-info" asp-action="Index"><i class="fa fa-chevron-left"></i>  عودة للقائمة </a>
+                </div>
+            </div>
+        </div>*@
+    </div>
+</form>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+
+
+

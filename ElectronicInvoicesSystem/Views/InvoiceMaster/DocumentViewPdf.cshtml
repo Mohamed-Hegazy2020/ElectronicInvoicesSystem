@@ -1,0 +1,95 @@
+﻿@model ElectronicInvoicesSystem.ModelsView.InvoiceMasterViewModel
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html dir="rtl" lang="ar">
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>DocumentViewPdf</title>
+    <link href="~/lib/bootstrap-v4-rtl-main/dist/css/bootstrap-rtl.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="container">
+        <table class="table table-bordered">
+            <thead class="text-left">
+                <tr><th class="border-0" colspan="7"><img alt="" src="~/assets/img/einvImg.png" width="100" height="70"> <strong style="font-size:x-large">نظام الفاتورة الإلكترونية </strong></th></tr>
+                <tr><th><hr /></th></tr>
+                <tr>
+                    <th class="bg-secondary"> @Html.DisplayNameFor(model => model.code)</th>
+                    <th> @Html.DisplayFor(model => model.code)</th>
+                    <th class="bg-secondary"> @Html.DisplayNameFor(model => model.date)</th>
+                    <th> @Html.DisplayFor(model => model.date)</th>
+                    <th class="bg-secondary"> @Html.DisplayNameFor(model => model.invState)</th>
+                    <th> @Html.DisplayFor(model => model.invState)</th>
+
+                </tr>
+
+                <tr>
+                    <th class="bg-secondary"> @Html.DisplayNameFor(model => model.companyName)</th>
+                    <th> @Html.DisplayFor(model => model.companyName)</th>
+                    <th class="bg-secondary"> @Html.DisplayNameFor(model => model.customerName)</th>
+                    <th> @Html.DisplayFor(model => model.customerName)</th>
+                    <th class="bg-secondary"> @Html.DisplayNameFor(model => model.DocTypeName)</th>
+                    <th> @Html.DisplayFor(model => model.DocTypeName)</th>
+
+                </tr>
+                <tr>
+                    <th class="bg-secondary"> @Html.DisplayNameFor(model => model.curuncyName)</th>
+                    <th> @Html.DisplayFor(model => model.curuncyName)</th>
+                    <th class="bg-secondary"> @Html.DisplayNameFor(model => model.invTotal)</th>
+                    <th> @Html.DisplayFor(model => model.invTotal)</th>
+                    <th class="bg-secondary"> @Html.DisplayNameFor(model => model.invDiscount)</th>
+                    <th> @Html.DisplayFor(model => model.invDiscount)</th>
+                </tr>
+                <tr>
+                    <th class="bg-secondary"> @Html.DisplayNameFor(model => model.invTax)</th>
+                    <th> @Html.DisplayFor(model => model.invTax)</th>
+                    <th class="bg-secondary"> @Html.DisplayNameFor(model => model.invNet)</th>
+                    <th> @Html.DisplayFor(model => model.invNet)</th>
+                </tr>
+                <tr>
+                </tr>
+            </thead>
+            <tbody>
+               
+            </tbody>
+        </table>
+
+        @if (Model.InvoiceDetails.Count > 0)
+        {
+            <table class="table">
+                <thead class="text-left">
+                    <tr class="bg-secondary">
+                        <th>@Html.DisplayNameFor(model => model.InvoiceDetails.FirstOrDefault().itemName)</th>
+                        <th>@Html.DisplayNameFor(model => model.InvoiceDetails.FirstOrDefault().Qty)</th>
+                        <th>@Html.DisplayNameFor(model => model.InvoiceDetails.FirstOrDefault().itemName)</th>
+                        <th>@Html.DisplayNameFor(model => model.InvoiceDetails.FirstOrDefault().price)</th>
+                        <th>@Html.DisplayNameFor(model => model.InvoiceDetails.FirstOrDefault().discountValue)</th>
+                        <th>@Html.DisplayNameFor(model => model.InvoiceDetails.FirstOrDefault().taxValue)</th>
+                        <th>@Html.DisplayNameFor(model => model.InvoiceDetails.FirstOrDefault().itemNetValue)</th>
+                    </tr>
+                </thead>
+                <tbody class="text-left">
+                    @foreach (var item in Model.InvoiceDetails)
+                    {
+                        <tr>
+                            <td class="text-left">@Html.DisplayFor(model => item.itemName)</td>
+                            <td>@Html.DisplayFor(model => item.Qty)</td>
+                            <td>@Html.DisplayFor(model => item.itemName)</td>
+                            <td>@Html.DisplayFor(model => item.price)</td>
+                            <td>@Html.DisplayFor(model => item.discountValue)</td>
+                            <td>@Html.DisplayFor(model => item.taxValue)</td>
+                            <td>@Html.DisplayFor(model => item.itemNetValue)</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+    </div>
+
+</body>
+</html>
