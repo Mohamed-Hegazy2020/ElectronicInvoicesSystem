@@ -1,19 +1,16 @@
 ﻿@model ElectronicInvoicesSystem.ModelsView.DocumentsMasterRpt
 
 @{
-    ViewData["Title"] = "إضافة مستند";
+    ViewData["Title"] = "تقرير المستندات";
     Layout = "~/Views/Shared/_NewLayout.cshtml";
 }
 <script src="~/lib/jquery/dist/jquery.min.js"></script>
 <link href="~/lib/bootstrap-v4-rtl-main/dist/css/bootstrap-rtl.css" rel="stylesheet" />
 <h5>تقرير المستندات</h5>
-
-
-
 <form>
     <div class="d-inline gap-2 col-2 mx-auto">
         <button class="btn btn-primary" type="button" id="showBtn"> <i class="fa fa-save"></i> عرض </button>
-        <a class="btn btn-success" asp-action="Create"> <i class="fa fa-file-o"></i> جديد </a>
+        <a class="btn btn-success" id="newBtn"> <i class="fa fa-file-o"></i> جديد </a>
         <button type="submit" asp-action="DocumentsRptPrint" class="btn btn-info" id="printBtn"> <i class="fa fa-list-ol"></i> طباعة</button>
     </div>
     <hr />
@@ -28,14 +25,14 @@
             <div class="col">
                 <div class="form-group">
                     <label asp-for="fDate" class="control-label"></label>
-                    <input asp-for="fDate" id="fDate" class="form-control" value="@DateTime.Now" />
+                    <input asp-for="fDate" id="fDate" class="form-control" type="date" value="@DateTime.Now.Date" style="text-align:right" />
 
                 </div>
             </div>
             <div class="col">
                 <div class="form-group">
                     <label asp-for="tDate" class="control-label"></label>
-                    <input asp-for="tDate" id="tDate" class="form-control" value="@DateTime.Now" />
+                    <input asp-for="tDate" id="tDate" class="form-control" type="date" value="@DateTime.Now.Date" style="text-align:right" />
                 </div>
             </div>
         </div>
@@ -64,7 +61,7 @@
 
     <div class="card-body">
         <div>
-            <table id="dtBasicExample" class="table table-bordered table-responsive-md table-striped text-center">
+            <table id="dtBasicExample" class="table table-bordered table-striped text-center">
                 <thead>
                     <tr>
                         <th class="text-center">رقم المستند</th>
@@ -87,25 +84,12 @@
     </div>
 
 </form>
-
-
-
 <script src="~/lib/jquery/dist/jquery.min.js"></script>
-
 <script>
     $(document).ready(function () {
         $("#newBtn").click(function () {
             $("#code").val(0);
-            $("#date").val(new Date());
-            $("#customerId").val(0);
-            $("#curuncyId").val(0);
-            $("#invDiscount").val(0);
-            $("#invTotal").val(0);
-            $("#invTotalAfterDiscount").val(0);
-            $("#invTax").val(0);
-            $("#itemNetValueMaster").val(0);
-            $("#invState").val(0);
-            $("#uuid").val(0);
+            $("#customerId").val(0);         
             $("#dtBasicExample > tbody tr").remove();
 
         });

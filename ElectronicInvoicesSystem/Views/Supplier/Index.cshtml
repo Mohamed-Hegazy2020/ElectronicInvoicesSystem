@@ -10,7 +10,7 @@
 <p>
     <a asp-action="Create" class="btn btn-outline-primary"> <i class="fa fa-file-o"></i> جديد </a>
 </p>
-<table class="table table-hover table-striped">
+<table class="table table-hover table-striped table-responsive-md">
     <thead>
         <tr class="bg-secondary">
             <th>
@@ -70,11 +70,9 @@
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Governate)
-                </td>
+                </td>               
                 <td>
-                <td>
-                    @Html.ActionLink("تعديل", "Edit", new { id = item.UniqueId }) |
-                    @*@Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |*@
+                    @Html.ActionLink("تعديل", "Edit", new { id = item.UniqueId }) |                   
                     @Html.ActionLink("حذف", "Delete", new { id = item.UniqueId })
                 </td>
             </tr>

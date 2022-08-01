@@ -10,7 +10,7 @@
         <div class="row">
             <div class="col-lg-3 col-sm-6 mb-lg-0 mb-4">
                 <a href="@Url.Action("getDocumentByType", "InvoiceMaster",new{docType="a" })">
-                    <div class="card" onclick="/*location.href='/InvoiceMaster/getDocumentByType/a';*/" style="cursor:pointer;">
+                    <div class="card" style="cursor:pointer;">
                         <div class="card-header p-3 pt-2">
                             <div class="icon icon-lg icon-shape bg-gradient-dark shadow-dark text-center border-radius-xl mt-n4 position-absolute">
                                 <i class="material-icons opacity-10">weekend</i>
@@ -28,7 +28,7 @@
             </div>
             <div class="col-lg-3 col-sm-6 mb-lg-0 mb-4">
                 <a href="@Url.Action("getDocumentByType", "InvoiceMaster",new{docType="I" })">
-                    <div class="card">
+                    <div class="card" style="cursor:pointer;">
                         <div class="card-header p-3 pt-2">
                             <div class="icon icon-lg icon-shape bg-gradient-primary shadow-primary text-center border-radius-xl mt-n4 position-absolute">
                                 <i class="material-icons opacity-10">leaderboard</i>
@@ -49,7 +49,7 @@
             </div>
             <div class="col-lg-3 col-sm-6 mb-lg-0 mb-4">
                 <a href="@Url.Action("getDocumentByType", "InvoiceMaster",new{docType="D" })">
-                    <div class="card">
+                    <div class="card" style="cursor:pointer;">
                         <div class="card-header p-3 pt-2">
                             <div class="icon icon-lg icon-shape bg-gradient-success shadow-success text-center border-radius-xl mt-n4 position-absolute">
                                 <i class="material-icons opacity-10">store</i>
@@ -69,7 +69,7 @@
             </div>
             <div class="col-lg-3 col-sm-6">
                 <a href="@Url.Action("getDocumentByType", "InvoiceMaster",new{docType="C" })">
-                    <div class="card">
+                    <div class="card" style="cursor:pointer;">
                         <div class="card-header p-3 pt-2">
                             <div class="icon icon-lg icon-shape bg-gradient-info shadow-info text-center border-radius-xl mt-n4 position-absolute">
                                 <i class="material-icons opacity-10">person_add</i>
@@ -530,13 +530,7 @@
         </footer>
     </div>
 </main>
-<script>
-    fi = function () {
-        alert("يجب ادخال قيمة الفاتورة");
 
-    }
-
-</script>
 
 
 

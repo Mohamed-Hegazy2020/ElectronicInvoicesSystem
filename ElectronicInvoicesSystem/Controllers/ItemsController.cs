@@ -55,11 +55,17 @@ namespace ElectronicInvoicesSystem.Controllers
         public ActionResult Create()
         {
             ItemsViewModel itms = new ItemsViewModel();
+            var Company = _context.Company.FirstOrDefault();
+            if (Company !=null)
+            {
+                itms.CompanyTaxRegestrationNo = Company.TaxAuthorityRegestrationNumber;
+            }
+
             itms.Units = _context.Unit.ToList();
             itms.ItemCodeType = new List<ItemCodeType>()
             {
                 new ItemCodeType(){ name="EGS" },
-                new ItemCodeType(){ name="GPC" },
+                new ItemCodeType(){ name="GS1" },
 
             };
             return View(itms);
@@ -82,6 +88,7 @@ namespace ElectronicInvoicesSystem.Controllers
                     c.ItemTaxAuthorityCode = cv.ItemTaxAuthorityCode;
                     c.ItemTaxAuthorityType = cv.ItemTaxAuthorityType;
                     c.UnitId = cv.UnitId;
+                    c.GPCBrickCode = cv.GPCBrickCode;
                     _context.Item.Add(c);
                     _context.SaveChanges();
                     return RedirectToAction(nameof(Index));
@@ -113,6 +120,7 @@ namespace ElectronicInvoicesSystem.Controllers
                     cv.ItemTaxAuthorityCode = c.ItemTaxAuthorityCode;
                     cv.UnitId = c.UnitId;
                     cv.ItemTaxAuthorityType = c.ItemTaxAuthorityType;
+                    cv.GPCBrickCode = c.GPCBrickCode;
 
                 }
                 cv.Units = _context.Unit.ToList();
@@ -148,6 +156,7 @@ namespace ElectronicInvoicesSystem.Controllers
                         c.NameAr = cv.NameAr;
                         c.ItemTaxAuthorityCode = cv.ItemTaxAuthorityCode;
                         c.UnitId = cv.UnitId;
+                        c.GPCBrickCode = cv.GPCBrickCode;
                         _context.SaveChanges();
                         return RedirectToAction(nameof(Index));
                     }

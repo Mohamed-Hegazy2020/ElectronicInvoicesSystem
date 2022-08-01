@@ -19,7 +19,7 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="Code" class="control-label"></label>
-                <input asp-for="Code" class="form-control" />
+                <input asp-for="Code" name="Code" class="form-control" />
                 <span asp-validation-for="Code" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -34,38 +34,52 @@
             </div>
             <div class="form-group">
                 <label asp-for="CreationDate" class="control-label"></label>
-                <input asp-for="CreationDate" class="form-control" />
+                <input id="CreationDate" asp-for="CreationDate" class="form-control"  type="date" value="@DateTime.Now.Date" style="text-align:right" />
                 <span asp-validation-for="CreationDate" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="ItemTaxAuthorityCode" class="control-label"></label>
-                <input asp-for="ItemTaxAuthorityCode" class="form-control" />
-                <span asp-validation-for="ItemTaxAuthorityCode" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="ItemTaxAuthorityType" class="control-label"></label>
                 <select class="form-control" asp-for="ItemTaxAuthorityType" asp-items="@(new SelectList(Model.ItemCodeType,"name","name"))"></select>
                 <span asp-validation-for="ItemTaxAuthorityType" class="text-danger"></span>
             </div>
+            <div class="form-group">
+                <label asp-for="GPCBrickCode" class="control-label"></label>
+                <input asp-for="GPCBrickCode" class="form-control" />
+                <span asp-validation-for="GPCBrickCode" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ItemTaxAuthorityCode" class="control-label"></label>
+                <input asp-for="ItemTaxAuthorityCode" class="form-control" readonly />
+                <span asp-validation-for="ItemTaxAuthorityCode" class="text-danger"></span>
+            </div>
 
-            @*<div class="row row-cols-2 p-3">
-            <div class="col-4">
-                <div class="form-group">
-                    <button type="submit" value="حفظ" class="btn btn-primary">
-                        <i class="fa fa-save"></i> حفظ
-                    </button>
-                </div>
-            </div>
-            <div class="col-6">
-                <div>
-                    <a class="btn btn-info" asp-action="Index"><i class="fa fa-chevron-left"></i>  عودة للقائمة </a>
-                </div>
-            </div>
-        </div>*@
         </form>
     </div>
 </div>
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+
+<script>
+    function getDate() {      
+        var today = new Date();
+        document.getElementById("CreationDate").value = today.getFullYear() + '-' + ('0' + (today.getMonth() + 1)).slice(-2) + '-' + ('0' + today.getDate()).slice(-2);
+    }
+    $(document).ready(function () {
+        getDate();
+        $('input[name=Code]').change(function () {
+            debugger;
+            var taxCode = "";
+            var docCode = $(this).val();
+
+            taxCode = 'EG' + '-' + @Model.CompanyTaxRegestrationNo +'-' + docCode
+            $("#ItemTaxAuthorityCode").val(taxCode);
+
+
+
+        });
+    });
+
+</script>
 

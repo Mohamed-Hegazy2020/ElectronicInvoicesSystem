@@ -11,7 +11,7 @@
     }
 
     tr input {
-        max-width: 80Px;
+        max-width: 80Px;      
         text-align: center;
     }
     body {
@@ -42,7 +42,7 @@
         <div class="col">
             <div class="form-group">
                 <label asp-for="date" class="control-label"></label>
-                <input asp-for="date" class="form-control" value="@DateTime.Now" required />
+                <input asp-for="date" class="form-control" id="date"  type="date" value="@DateTime.Now.Date" style="text-align:right" />
                 <span asp-validation-for="date" class="text-danger"></span>
             </div>
         </div>
@@ -149,14 +149,14 @@
                 <tbody>
                     <tr class="hide">
                         <td class="pt-3-half d-none" contenteditable="false" id="">id</td>
-                        <td class="pt-3-half"><select class="form-control itemId" id="itemId" asp-items="@(new SelectList(Model.Items,"UniqueId","NameAr"))"></select></td>
+                        <td class="pt-3-half"><select style="min-width: 150Px;" class="form-control itemId" id="itemId" asp-items="@(new SelectList(Model.Items,"UniqueId","NameAr"))"></select></td>
                         <td class="pt-3-half tablecol"><input class="Qty" type="number" value="0" id="Qty"></td>
-                        <td class="pt-3-half"><select class="form-control unitId" id="unitId" asp-items="@(new SelectList(Model.Units,"UniqueId","NameAr"))"></select></td>
+                        <td class="pt-3-half"><select style="min-width: 80Px;" class="form-control unitId" id="unitId" asp-items="@(new SelectList(Model.Units,"UniqueId","NameAr"))"></select></td>
                         <td class="pt-3-half tablecol"><input class="price" type="number" id="price" value="0"></td>
                         <td class="pt-3-half itemValue" id="itemValue">0</td>
                         <td class="pt-3-half"><input class="discountRate" type="number" id="discountRate" value="0"></td>
                         <td class="pt-3-half discountValue" id="discountValue">0</td>
-                        <td class="pt-3-half taxType" id="taxType">ضريبة القيمة المضافة</td>
+                        <td class="pt-3-half taxType" id="taxType">VAT</td>
                         <td class="pt-3-half"><input class="taxRate" type="number" id="taxRate" value="14"></td>
                         <td class="pt-3-half taxValue" id="taxValue">0</td>
                         <td class="pt-3-half itemNetValue" id="itemNetValue">0</td>
@@ -282,8 +282,13 @@
         $('#invTotalAfterDiscount').val(invTotal - invDiscount);
 
     }
+    function getDate() {
+        var today = new Date();
+        document.getElementById("date").value = today.getFullYear() + '-' + ('0' + (today.getMonth() + 1)).slice(-2) + '-' + ('0' + today.getDate()).slice(-2);
+    }
 
     $(document).ready(function () {
+        getDate();
         $("#table").on("change", "input", function () {
             var row = $(this).closest("tr");
             var qty = parseFloat(row.find("#Qty").val());

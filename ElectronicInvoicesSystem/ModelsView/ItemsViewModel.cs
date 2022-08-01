@@ -41,6 +41,16 @@ namespace ElectronicInvoicesSystem.ModelsView
         public List<Units> Units = new List<Units>();
         public List<ItemCodeType> ItemCodeType = new List<ItemCodeType>();
 
+        public string CompanyTaxRegestrationNo { get; set; }
+
+        [Required(ErrorMessage = "يجب ادخال كود GPC Brick  ")]
+        [StringLength(8, MinimumLength = 8)]
+        [Display(Name = "كود GPC Brick")]
+        public string GPCBrickCode { get; set; }
+
+
+
+
 
     }
 }

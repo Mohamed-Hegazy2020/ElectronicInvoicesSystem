@@ -22,5 +22,6 @@ namespace ElectronicInvoicesSystem.Models
         public DateTime CreationDate { get; set; }      
         public string ItemTaxAuthorityCode { get; set; }
         public string ItemTaxAuthorityType { get; set; }
+        public string GPCBrickCode { get; set; }
     }
 }
