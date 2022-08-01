@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "F:\\Hegazy2022\\Traning Applications\\ElectronicInvoicesSystem\\ElectronicInvoicesSystem\\ElectronicInvoicesSystem.csproj": {}
+    "F:\\Hegazy2022\\Traning Applications\\MyApplications\\ElectronicInvoicesSystem\\ElectronicInvoicesSystem\\ElectronicInvoicesSystem\\ElectronicInvoicesSystem.csproj": {}
   },
   "projects": {
-    "F:\\Hegazy2022\\Traning Applications\\ElectronicInvoicesSystem\\ElectronicInvoicesSystem\\ElectronicInvoicesSystem.csproj": {
+    "F:\\Hegazy2022\\Traning Applications\\MyApplications\\ElectronicInvoicesSystem\\ElectronicInvoicesSystem\\ElectronicInvoicesSystem\\ElectronicInvoicesSystem.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "F:\\Hegazy2022\\Traning Applications\\ElectronicInvoicesSystem\\ElectronicInvoicesSystem\\ElectronicInvoicesSystem.csproj",
+        "projectUniqueName": "F:\\Hegazy2022\\Traning Applications\\MyApplications\\ElectronicInvoicesSystem\\ElectronicInvoicesSystem\\ElectronicInvoicesSystem\\ElectronicInvoicesSystem.csproj",
         "projectName": "ElectronicInvoicesSystem",
-        "projectPath": "F:\\Hegazy2022\\Traning Applications\\ElectronicInvoicesSystem\\ElectronicInvoicesSystem\\ElectronicInvoicesSystem.csproj",
+        "projectPath": "F:\\Hegazy2022\\Traning Applications\\MyApplications\\ElectronicInvoicesSystem\\ElectronicInvoicesSystem\\ElectronicInvoicesSystem\\ElectronicInvoicesSystem.csproj",
         "packagesPath": "C:\\Users\\Tidal-12\\.nuget\\packages\\",
-        "outputPath": "F:\\Hegazy2022\\Traning Applications\\ElectronicInvoicesSystem\\ElectronicInvoicesSystem\\obj\\",
+        "outputPath": "F:\\Hegazy2022\\Traning Applications\\MyApplications\\ElectronicInvoicesSystem\\ElectronicInvoicesSystem\\ElectronicInvoicesSystem\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\DevExpress 20.2\\Components\\Offline Packages",

@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "ZKY5kdGZItnM5zIOkslB40yOQwmf7yZ9qPpnGbS++K53pCboWN92UOk51tLQCcRrk+AB2nEHMOYF4RK5WWLKwA==",
+  "dgSpecHash": "Os0KKV6ZqqvHJB5633+Oyc/i6OXi+UqqblWO5pIjAMBBdSCtdx0q+X3WEdL5xtT0UvWw5kyJgnsGutgCZ1yK4A==",
   "success": true,
-  "projectFilePath": "F:\\Hegazy2022\\Traning Applications\\ElectronicInvoicesSystem\\ElectronicInvoicesSystem\\ElectronicInvoicesSystem.csproj",
+  "projectFilePath": "F:\\Hegazy2022\\Traning Applications\\MyApplications\\ElectronicInvoicesSystem\\ElectronicInvoicesSystem\\ElectronicInvoicesSystem\\ElectronicInvoicesSystem.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Tidal-12\\.nuget\\packages\\bouncycastle.netcore\\1.9.0\\bouncycastle.netcore.1.9.0.nupkg.sha512",
     "C:\\Users\\Tidal-12\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",

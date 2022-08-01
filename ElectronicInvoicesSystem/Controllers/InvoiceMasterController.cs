@@ -53,6 +53,7 @@ namespace ElectronicInvoicesSystem.Controllers
                       return l;
 
                   }).ToList();
+                ViewBag.docType = "كل المستندات";
                 return View(mv.OrderByDescending(o => o.date).Take(15));
 
             }
@@ -756,6 +757,90 @@ namespace ElectronicInvoicesSystem.Controllers
             }
 
         }
+
+        [HttpGet]
+        public ActionResult getDocumentByType(string docType)
+        {
+            ViewBag.docType = "";
+            if (!string.IsNullOrWhiteSpace(docType) && docType!="a")
+            {               
+                var m = _context.InvoiceMaster.Where(x => x.DocType == docType).ToList();
+                List<InvoiceMasterViewModel> mv = new List<InvoiceMasterViewModel>();
+                mv = m.Select(x =>
+                {
+                    InvoiceMasterViewModel l = new InvoiceMasterViewModel();
+
+                    l.id = x.id;
+                    l.code = x.code;
+                    l.date = x.date;
+                    l.invTotal = x.invTotal;
+                    l.invDiscount = x.invDiscount;
+                    l.invTax = x.invTax;
+                    l.invNet = x.invNet;
+                    l.invState = x.invState;
+                    if (x.DocType == "I")
+                    {
+                        l.DocTypeName = "فاتورة";
+
+                    }
+                    if (x.DocType == "C")
+                    {
+                        l.DocTypeName = "إشعار داين";
+                    }
+                    if (x.DocType == "D")
+                    {
+                        l.DocTypeName = "إشعار مدين";
+                    }
+                    return l;
+
+                }).ToList();
+                ViewBag.docType =" مستندات  " + mv.FirstOrDefault().DocTypeName;
+                return View("Index", mv.OrderByDescending(o => o.date));              
+
+            }
+            else if (!string.IsNullOrWhiteSpace(docType) && docType == "a")
+            {
+                ViewBag.docType = "كل المستندات";
+                var m = _context.InvoiceMaster.ToList();
+                List<InvoiceMasterViewModel> mv = new List<InvoiceMasterViewModel>();
+                mv = m.Select(x =>
+                {
+                    InvoiceMasterViewModel l = new InvoiceMasterViewModel();
+
+                    l.id = x.id;
+                    l.code = x.code;
+                    l.date = x.date;
+                    l.invTotal = x.invTotal;
+                    l.invDiscount = x.invDiscount;
+                    l.invTax = x.invTax;
+                    l.invNet = x.invNet;
+                    l.invState = x.invState;
+                    if (x.DocType == "I")
+                    {
+                        l.DocTypeName = "فاتورة";
+                    }
+                    if (x.DocType == "C")
+                    {
+                        l.DocTypeName = "إشعار داين";
+                    }
+                    if (x.DocType == "D")
+                    {
+                        l.DocTypeName = "إشعار مدين";
+                    }
+                    return l;
+
+                }).ToList();
+                return View("Index", mv.OrderByDescending(o => o.date));
+              
+            }
+            else
+            {
+                return NotFound();
+
+            }
+
+        }
+
         public ActionResult PrintPdf<T>(int id,T data,string viewName)
         {
             var report = new ViewAsPdf(viewName, data)

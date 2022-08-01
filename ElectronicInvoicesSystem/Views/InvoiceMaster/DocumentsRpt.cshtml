@@ -93,11 +93,7 @@
 <script src="~/lib/jquery/dist/jquery.min.js"></script>
 
 <script>
-
-
     $(document).ready(function () {
-
-
         $("#newBtn").click(function () {
             $("#code").val(0);
             $("#date").val(new Date());
@@ -111,7 +107,6 @@
             $("#invState").val(0);
             $("#uuid").val(0);
             $("#dtBasicExample > tbody tr").remove();
-
 
         });
 
@@ -162,33 +157,8 @@
                     alert(result.result);
                 }
             });
-
-
         }
         );
-
-        //$("#printBtn").click(function () {
-
-        //    var InvoiceDetailes = new Array();
-        //    var code = $("#code").val();
-        //    var fdate = $("#fDate").val();
-        //    var tdate = $("#tDate").val();
-        //    var customerId = $("#customerId").val();
-        //    var DocType = $("#DocType").val();
-        //    var DocState = $("#DocState").val();
-
-        //    $.ajax({
-        //        type: "POST",
-        //        url: "/InvoiceMaster/DocumentsRptPrint",
-        //        data: { 'code': code, 'fdate': fdate, 'tdate': tdate, 'customerId': customerId, 'DocType': DocType, 'DocState': DocState },
-        //        contentType: "application/x-www-form-urlencoded",
-        //        dataType: "json",     
-        //    });
-
-
-        //}
-        //);
-
 
     });
 </script>

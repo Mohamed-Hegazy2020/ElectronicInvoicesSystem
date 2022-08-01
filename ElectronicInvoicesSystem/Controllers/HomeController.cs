@@ -1,4 +1,6 @@
-﻿using ElectronicInvoicesSystem.Models;
+﻿using ElectronicInvoicesSystem.Data;
+using ElectronicInvoicesSystem.Models;
+using ElectronicInvoicesSystem.ModelsView;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
@@ -12,10 +14,12 @@ namespace ElectronicInvoicesSystem.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly DatabaseContext _context;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, DatabaseContext context)
         {
             _logger = logger;
+            _context = context;
         }
 
         public IActionResult Index()
@@ -30,7 +34,17 @@ namespace ElectronicInvoicesSystem.Controllers
 
         public IActionResult Dashboard()
         {
-            return View();
+            DashboardViewModel d = new DashboardViewModel();
+            var t = _context.InvoiceMaster;
+            if (t.Any())
+            {
+                d.AllDocumentsCount = t.Count();              
+                d.InvoicesCount = t.Where(x=>x.DocType=="I").Count();
+                d.DebitsCount = t.Where(x => x.DocType == "D").Count();
+                d.CridetsCount = t.Where(x => x.DocType == "C").Count();
+
+            }
+            return View(d);
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
