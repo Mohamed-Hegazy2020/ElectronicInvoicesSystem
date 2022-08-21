@@ -26,7 +26,7 @@ using ElectronicInvoicesSystem.Models;
 #line default
 #line hidden
 #nullable disable
-    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"bab32189dcbe0eedcbdfee6a4bf6d8abe4f73616", @"/Views/InvoiceMaster/DocumentsRptPrint.cshtml")]
+    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"5ad1f3af629b2d0fe545ae132699a9d40bafe753", @"/Views/InvoiceMaster/DocumentsRptPrint.cshtml")]
     [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"920d1180230752c81324fac2600ea527f70bce72", @"/Views/_ViewImports.cshtml")]
     public class Views_InvoiceMaster_DocumentsRptPrint : global::Microsoft.AspNetCore.Mvc.Razor.RazorPage<IEnumerable<ElectronicInvoicesSystem.ModelsView.DocumentsMasterRpt>>
     {
@@ -72,9 +72,9 @@ using ElectronicInvoicesSystem.Models;
 #line hidden
 #nullable disable
             WriteLiteral("\r\n<!DOCTYPE html>\r\n\r\n<html dir=\"rtl\" lang=\"ar\">\r\n");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("head", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "bab32189dcbe0eedcbdfee6a4bf6d8abe4f736166130", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("head", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "5ad1f3af629b2d0fe545ae132699a9d40bafe7536266", async() => {
                 WriteLiteral("\r\n    <meta name=\"viewport\" content=\"width=device-width\" />\r\n    <title>DocumentViewPdf</title>\r\n    ");
-                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("link", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.SelfClosing, "bab32189dcbe0eedcbdfee6a4bf6d8abe4f736166495", async() => {
+                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("link", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.SelfClosing, "5ad1f3af629b2d0fe545ae132699a9d40bafe7536631", async() => {
                 }
                 );
                 __Microsoft_AspNetCore_Mvc_Razor_TagHelpers_UrlResolutionTagHelper = CreateTagHelper<global::Microsoft.AspNetCore.Mvc.Razor.TagHelpers.UrlResolutionTagHelper>();
@@ -101,7 +101,7 @@ using ElectronicInvoicesSystem.Models;
             Write(__tagHelperExecutionContext.Output);
             __tagHelperExecutionContext = __tagHelperScopeManager.End();
             WriteLiteral("\r\n");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("body", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "bab32189dcbe0eedcbdfee6a4bf6d8abe4f736168377", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("body", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "5ad1f3af629b2d0fe545ae132699a9d40bafe7538513", async() => {
                 WriteLiteral("\r\n");
 #nullable restore
 #line 16 "F:\sys programs\myGithubProfile\ElectronicInvoice\E_InvoiceSystem\ElectronicInvoicesSystem\Views\InvoiceMaster\DocumentsRptPrint.cshtml"
@@ -111,8 +111,8 @@ using ElectronicInvoicesSystem.Models;
 #line default
 #line hidden
 #nullable disable
-                WriteLiteral("    <div class=\"container\">\r\n        <table class=\"table table-responsive-md\">\r\n            <thead class=\"text-left\">\r\n                <tr><th class=\"border-0\" colspan=\"7\">");
-                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagOnly, "bab32189dcbe0eedcbdfee6a4bf6d8abe4f736169111", async() => {
+                WriteLiteral("    <div class=\"container\">\r\n        <table class=\"table table-bordered table-responsive-md\">\r\n            <thead class=\"text-left\">\r\n                <tr><th class=\"border-0\" colspan=\"7\">");
+                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagOnly, "5ad1f3af629b2d0fe545ae132699a9d40bafe7539296", async() => {
                 }
                 );
                 __Microsoft_AspNetCore_Mvc_Razor_TagHelpers_UrlResolutionTagHelper = CreateTagHelper<global::Microsoft.AspNetCore.Mvc.Razor.TagHelpers.UrlResolutionTagHelper>();
