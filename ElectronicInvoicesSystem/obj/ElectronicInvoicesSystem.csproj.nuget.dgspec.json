@@ -1,26 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "F:\\Hegazy2022\\Traning Applications\\MyApplications\\ElectronicInvoicesSystem\\ElectronicInvoicesSystem\\ElectronicInvoicesSystem\\ElectronicInvoicesSystem.csproj": {}
+    "F:\\sys programs\\myGithubProfile\\ElectronicInvoice\\E_InvoiceSystem\\ElectronicInvoicesSystem\\ElectronicInvoicesSystem.csproj": {}
   },
   "projects": {
-    "F:\\Hegazy2022\\Traning Applications\\MyApplications\\ElectronicInvoicesSystem\\ElectronicInvoicesSystem\\ElectronicInvoicesSystem\\ElectronicInvoicesSystem.csproj": {
+    "F:\\sys programs\\myGithubProfile\\ElectronicInvoice\\E_InvoiceSystem\\ElectronicInvoicesSystem\\ElectronicInvoicesSystem.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "F:\\Hegazy2022\\Traning Applications\\MyApplications\\ElectronicInvoicesSystem\\ElectronicInvoicesSystem\\ElectronicInvoicesSystem\\ElectronicInvoicesSystem.csproj",
+        "projectUniqueName": "F:\\sys programs\\myGithubProfile\\ElectronicInvoice\\E_InvoiceSystem\\ElectronicInvoicesSystem\\ElectronicInvoicesSystem.csproj",
         "projectName": "ElectronicInvoicesSystem",
-        "projectPath": "F:\\Hegazy2022\\Traning Applications\\MyApplications\\ElectronicInvoicesSystem\\ElectronicInvoicesSystem\\ElectronicInvoicesSystem\\ElectronicInvoicesSystem.csproj",
-        "packagesPath": "C:\\Users\\Tidal-12\\.nuget\\packages\\",
-        "outputPath": "F:\\Hegazy2022\\Traning Applications\\MyApplications\\ElectronicInvoicesSystem\\ElectronicInvoicesSystem\\ElectronicInvoicesSystem\\obj\\",
+        "projectPath": "F:\\sys programs\\myGithubProfile\\ElectronicInvoice\\E_InvoiceSystem\\ElectronicInvoicesSystem\\ElectronicInvoicesSystem.csproj",
+        "packagesPath": "C:\\Users\\TOSHIBA\\.nuget\\packages\\",
+        "outputPath": "F:\\sys programs\\myGithubProfile\\ElectronicInvoice\\E_InvoiceSystem\\ElectronicInvoicesSystem\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
-          "C:\\Program Files (x86)\\DevExpress 20.2\\Components\\Offline Packages",
-          "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\",
-          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+          "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\"
         ],
         "configFilePaths": [
-          "C:\\Users\\Tidal-12\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\DevExpress 20.2.config",
+          "C:\\Users\\TOSHIBA\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
         ],
@@ -28,9 +25,8 @@
           "net5.0"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\DevExpress 20.2\\Components\\System\\Components\\Packages": {},
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "https://api.nuget.org/v3/index.json": {}
+          "https://www.nuget.org/api/v2": {}
         },
         "frameworks": {
           "net5.0": {
@@ -51,6 +47,14 @@
             "BouncyCastle.NetCore": {
               "target": "Package",
               "version": "[1.9.0, )"
+            },
+            "Microsoft.AspNetCore.Identity": {
+              "target": "Package",
+              "version": "[2.2.0, )"
+            },
+            "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[5.0.16, )"
             },
             "Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation": {
               "target": "Package",

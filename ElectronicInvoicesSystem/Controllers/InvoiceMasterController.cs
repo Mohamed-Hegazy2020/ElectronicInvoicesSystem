@@ -10,8 +10,11 @@ using System.Text.Json;
 using System.Threading.Tasks;
 using Tidal_ERP_System.Electronic_Invoice;
 using Rotativa.AspNetCore;
+using Microsoft.AspNetCore.Authorization;
+
 namespace ElectronicInvoicesSystem.Controllers
 {
+    [Authorize]
     public class InvoiceMasterController : Controller
     {
         private readonly DatabaseContext _context;
@@ -845,12 +848,13 @@ namespace ElectronicInvoicesSystem.Controllers
         {
             var report = new ViewAsPdf(viewName, data)
             {
-                PageMargins = { Left = 10, Bottom = 10, Right = 10, Top = 10 },
-                FileName = "Document_" + DateTime.Now + ".pdf",
+                PageMargins = { Left = 5, Bottom = 5, Right = 5, Top = 5 },
+                //FileName = "Document_" + DateTime.Now + ".pdf",
                 PageOrientation = Rotativa.AspNetCore.Options.Orientation.Landscape,
                 PageSize = Rotativa.AspNetCore.Options.Size.A4,
-              
+                IsGrayScale = true,
                
+
 
 
             };

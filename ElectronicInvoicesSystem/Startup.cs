@@ -3,6 +3,7 @@ using ElectronicInvoicesSystem.Servcies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -30,6 +31,17 @@ namespace ElectronicInvoicesSystem
             services.AddControllersWithViews().AddRazorRuntimeCompilation();
             services.AddDbContext<DatabaseContext>(item => item.UseSqlServer(Configuration.GetConnectionString("conStr")));
             services.AddSingleton<IWorker, Worker>();
+            services.AddIdentity<IdentityUser, IdentityRole>(
+           options => {            
+               options.SignIn.RequireConfirmedAccount = false;
+               options.Password.RequireDigit = false;
+               options.Password.RequireNonAlphanumeric = false;
+               options.Password.RequireUppercase = false;
+               options.Password.RequiredLength = 4;
+
+               //Other options go here
+           }
+       ).AddEntityFrameworkStores<DatabaseContext>().AddDefaultTokenProviders();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -38,6 +50,7 @@ namespace ElectronicInvoicesSystem
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+                //app.UseExceptionHandler("/Home/Error");
             }
             else
             {
@@ -48,16 +61,18 @@ namespace ElectronicInvoicesSystem
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 
-            app.UseRouting();
-
-            app.UseAuthorization();
+            
+            app.UseAuthentication();
+            app.UseRouting(); 
+            app.UseAuthorization(); 
+                
             RotativaConfiguration.Setup((Microsoft.AspNetCore.Hosting.IHostingEnvironment)env);
 
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Home}/{action=Dashboard}/{id?}");
+                    pattern: "{controller=Account}/{action=Login}/{id?}");
             });
         }
     }

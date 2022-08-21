@@ -1,4 +1,6 @@
 ﻿using ElectronicInvoicesSystem.Models;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -7,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace ElectronicInvoicesSystem.Data
 {
-    public class DatabaseContext : DbContext
+    public class DatabaseContext : IdentityDbContext<IdentityUser, IdentityRole, string>
     {
         public DatabaseContext(DbContextOptions options) : base(options)
         {

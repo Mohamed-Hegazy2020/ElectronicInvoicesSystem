@@ -1,6 +1,7 @@
 ﻿using ElectronicInvoicesSystem.Data;
 using ElectronicInvoicesSystem.Models;
 using ElectronicInvoicesSystem.ModelsView;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -9,6 +10,7 @@ using System.Linq;
 
 namespace ElectronicInvoicesSystem.Controllers
 {
+    [Authorize]
     public class CompanyController : Controller
     {
         private readonly DatabaseContext _context;

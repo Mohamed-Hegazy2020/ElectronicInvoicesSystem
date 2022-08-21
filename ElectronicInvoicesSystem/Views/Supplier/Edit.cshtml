@@ -7,15 +7,14 @@
 
 <link href="~/lib/bootstrap-v4-rtl-main/dist/css/bootstrap-rtl.css" rel="stylesheet" />
 
-
-
-<h4>تعديل مورد</h4>
-
 <form asp-action="Edit">
-    <div style="margin:2px 100px 2px 100px">
-        <div class="d-inline gap-2 col-2 mx-auto">
-            <button class="btn btn-primary" type="submit" id="CreateBtn"> <i class="fa fa-save"></i> حفظ </button>
-            <a class="btn btn-info" asp-action="Index"><i class="fa fa-chevron-left"></i>  عودة للقائمة </a>            
+    <div>     
+        <div class="row">
+            <div class="col-md-8"><h1> <i class="fa fa-file-o"> </i>  تعديل مورد</h1></div>
+            <div class="col-md-2"> <button class="btn btn-primary w-100" type="submit" id="CreateBtn"> <i class="fa fa-save"></i> حفظ </button></div>
+            <div class="col-md-2">
+                <a class="btn btn-info w-100" asp-action="Index"><i class="fa fa-chevron-left"></i>  عودة للقائمة </a>
+            </div>
         </div>
         <hr />
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>

@@ -1,5 +1,8 @@
 ﻿<!DOCTYPE html>
-<html  dir="rtl" lang="ar">
+<html dir="rtl" lang="ar">
+@using Microsoft.AspNetCore.Identity;
+@inject SignInManager<IdentityUser> signInManager;
+@using Microsoft.AspNetCore.Authorization
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -17,9 +20,10 @@
             font-family: Arial;
             overflow: hidden !important;
         }
+
         h1, h2, h3, h4, h5, h6 {
             font-family: Arial;
-            font-weight:bold;
+            font-weight: bold;
         }
     </style>
 </head>
@@ -116,12 +120,8 @@
                     </a>
                 </li>
             </ul>
+   
         </div>
-        @*<div class="sidenav-footer position-absolute w-100 bottom-0 ">
-            <div class="mx-3">
-                <a class="btn bg-gradient-primary mt-4 w-100" href="https://www.creative-tim.com/product/material-dashboard-pro?ref=sidebarfree" type="button">Upgrade to pro</a>
-            </div>
-        </div>*@
     </aside>
 
     <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg body">
@@ -131,27 +131,33 @@
                     <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 ">
                         <li class="breadcrumb-item text-sm ps-2">
                             <a class="opacity-8 text-body font-weight-bold font-italic" href="javascript:;">
-                                <img alt="" src="~/assets/img/einvImg.png" width="100" height="70"> <strong style="font-size:x-large">نظام الفاتورة الإلكترونية </strong>
+                                <img alt="" src="~/assets/img/logo-1.png" width="150" height="80"> <strong style="font-size:x-large"></strong>
                             </a>
                         </li>
-                        @*<li class="breadcrumb-item text-sm text-dark active" aria-current="page">RTL</li>*@
                     </ol>
-                    @*<h6 class="font-weight-bolder mb-0">RTL</h6>*@
                 </nav>
-                <div class="collapse navbar-collapse mt-sm-0 mt-2 px-0" id="navbar">
-                    @*<div class="ms-md-auto pe-md-3 d-flex align-items-center">
-                            <div class="input-group input-group-outline">
-                                <label class="form-label">أكتب هنا...</label>
-                                <input type="text" class="form-control">
-                            </div>
-                        </div>*@
-                    <ul class="navbar-nav me-auto ms-0 justify-content-end">
-                        <li class="nav-item d-flex align-items-center">
-                            <a href="~/pages/sign-in.html" class="nav-link text-body font-weight-bold px-0">
-                                <i class="fa fa-user me-sm-1"></i>
-                                <span class="d-sm-inline d-none">يسجل دخول</span>
-                            </a>
-                        </li>
+                <div class="collapse navbar-collapse mt-sm-0 mt-2 px-0" id="navbar">            
+                    <ul class="navbar-nav me-auto ms-0 justify-content-end">    
+                        @if (signInManager.IsSignedIn(User))
+                        {
+                            <li class="nav-item">
+                                <i class="fa fa-user me-sm-1"></i> @User.Identity.Name 
+                            </li>
+                            <li class="nav-item">
+                                <form method="post" asp-action="LogOut" asp-controller="Account">
+                                    <button type="submit" class="nav-link btn btn-link py-0" style="width:auto;">خروج</button>
+                                </form>
+                            </li>
+                            }
+                        else
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Register">Register</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Login">Log In</a>
+                            </li>
+                        }
                         <li class="nav-item d-xl-none pe-3 d-flex align-items-center">
                             <a href="javascript:;" class="nav-link text-body p-0" id="iconNavbarSidenav">
                                 <div class="sidenav-toggler-inner">
@@ -161,12 +167,12 @@
                                 </div>
                             </a>
                         </li>
-                        <li class="nav-item px-3 d-flex align-items-center">
+                        @*<li class="nav-item px-3 d-flex align-items-center">
                             <a href="javascript:;" class="nav-link text-body p-0">
                                 <i class="fa fa-cog fixed-plugin-button-nav cursor-pointer"></i>
                             </a>
-                        </li>
-                        <li class="nav-item dropdown ps-2 d-flex align-items-center">
+                        </li>*@
+                        @*<li class="nav-item dropdown ps-2 d-flex align-items-center">
                             <a href="javascript:;" class="nav-link text-body p-0" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
                                 <i class="fa fa-bell cursor-pointer"></i>
                             </a>
@@ -238,7 +244,7 @@
                                     </a>
                                 </li>
                             </ul>
-                        </li>
+                        </li>*@
                     </ul>
                 </div>
             </div>
@@ -578,14 +584,14 @@
         });
     </script>
     <script>
-            var win = navigator.platform.indexOf('Win') > -1;
-            if (win && document.querySelector('#sidenav-scrollbar')) {
-                var options = {
-                    damping: '0.5'
-                }
-                Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
+        var win = navigator.platform.indexOf('Win') > -1;
+        if (win && document.querySelector('#sidenav-scrollbar')) {
+            var options = {
+                damping: '0.5'
             }
-        </script>
+            Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
+        }
+    </script>
     <script async defer src="https://buttons.github.io/buttons.js"></script>
     <script src="~/assets/js/material-dashboard.min.js?v=3.0.0"></script>
     @await RenderSectionAsync("Scripts", required: false)

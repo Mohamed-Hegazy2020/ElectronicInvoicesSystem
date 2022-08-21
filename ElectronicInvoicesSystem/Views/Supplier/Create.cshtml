@@ -6,16 +6,16 @@
 }
 <link href="~/lib/bootstrap-v4-rtl-main/dist/css/bootstrap-rtl.css" rel="stylesheet" />
 
-
-
-<h4>تعريف مورد</h4>
-
 <form asp-action="Create">
-    <div style="margin:2px 100px 2px 100px">
-        <div class="d-inline gap-2 col-2 mx-auto">
-            <button class="btn btn-primary" type="submit" id="CreateBtn"> <i class="fa fa-save"></i> حفظ </button>
-            <a class="btn btn-info" asp-action="Index"><i class="fa fa-chevron-left"></i>  عودة للقائمة </a>
+    <div class="row">
+        <div class="col-md-8"><h1> <i class="fa fa-file-o"> </i>  تعريف مورد</h1></div>
+        <div class="col-md-2"> <button class="btn btn-primary w-100" type="submit" id="CreateBtn"> <i class="fa fa-save"></i> حفظ </button></div>
+        <div class="col-md-2">
+            <a class="btn btn-info w-100" asp-action="Index"><i class="fa fa-chevron-left"></i>  عودة للقائمة </a>
         </div>
+    </div>
+    <div>
+    
         <hr />
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
         <div class="row row-cols-2">
@@ -143,19 +143,19 @@
         </div>
 
         @*<div class="row row-cols-2 p-3">
-            <div class="col-2">
-                <div class="form-group">
-                    <button type="submit" value="حفظ" class="btn btn-primary">
-                        <i class="fa fa-save"></i> حفظ
-                    </button>
+                <div class="col-2">
+                    <div class="form-group">
+                        <button type="submit" value="حفظ" class="btn btn-primary">
+                            <i class="fa fa-save"></i> حفظ
+                        </button>
+                    </div>
                 </div>
-            </div>
-            <div class="col-6">
-                <div>
-                    <a class="btn btn-info" asp-action="Index"><i class="fa fa-chevron-left"></i>  عودة للقائمة </a>
+                <div class="col-6">
+                    <div>
+                        <a class="btn btn-info" asp-action="Index"><i class="fa fa-chevron-left"></i>  عودة للقائمة </a>
+                    </div>
                 </div>
-            </div>
-        </div>*@
+            </div>*@
     </div>
 </form>
 

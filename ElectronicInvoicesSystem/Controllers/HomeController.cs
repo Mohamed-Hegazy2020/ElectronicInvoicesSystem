@@ -1,6 +1,7 @@
 ﻿using ElectronicInvoicesSystem.Data;
 using ElectronicInvoicesSystem.Models;
 using ElectronicInvoicesSystem.ModelsView;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
@@ -11,6 +12,7 @@ using System.Threading.Tasks;
 
 namespace ElectronicInvoicesSystem.Controllers
 {
+    [Authorize]
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
@@ -31,7 +33,7 @@ namespace ElectronicInvoicesSystem.Controllers
         {
             return View();
         }
-
+       
         public IActionResult Dashboard()
         {
             DashboardViewModel d = new DashboardViewModel();
